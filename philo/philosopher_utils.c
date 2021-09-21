@@ -6,7 +6,7 @@
 /*   By: kmazier <kmazier@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/22 00:19:43 by kmazier           #+#    #+#             */
-/*   Updated: 2021/09/22 00:22:28 by kmazier          ###   ########.fr       */
+/*   Updated: 2021/09/22 00:51:42 by kmazier          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,4 +40,17 @@ void	philo_speak(t_philo *philo, char *msg, int force)
 	write(STDOUT_FILENO, msg, ft_strlen(msg));
 	write(STDOUT_FILENO, "\n", 1);
 	pthread_mutex_unlock(&philo->store->speak_lock);
+}
+
+void	drop_forks(t_philo **philo)
+{
+	drop_left_fork(philo);
+	drop_right_fork(philo);
+}
+
+void	*quit(t_philo **philo)
+{
+	drop_forks(philo);
+	(*philo)->dead_time = -1;
+	return (NULL);
 }

@@ -6,7 +6,7 @@
 /*   By: kmazier <kmazier@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/20 17:39:10 by kmazier           #+#    #+#             */
-/*   Updated: 2021/09/22 00:23:37 by kmazier          ###   ########.fr       */
+/*   Updated: 2021/09/22 00:51:48 by kmazier          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,5 +74,9 @@ void			_usleep(int time);
 void			ft_putnbr_fd(int n, int fd);
 void			philo_speak(t_philo *philo, char *msg, int force);
 t_store			*free_store(t_store *store);
+void			drop_right_fork(t_philo **philo);
+void			drop_left_fork(t_philo **philo);
+void			drop_forks(t_philo **philo);
+void			*quit(t_philo **philo);
 
 #endif

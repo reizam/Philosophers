@@ -6,7 +6,7 @@
 /*   By: kmazier <kmazier@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/20 18:22:14 by kmazier           #+#    #+#             */
-/*   Updated: 2021/09/22 00:22:23 by kmazier          ###   ########.fr       */
+/*   Updated: 2021/09/22 00:51:34 by kmazier          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,19 +80,19 @@ void	*philosopher_thread(void *p_data)
 	philo = (t_philo *)p_data;
 	eat_left
 		= philo->store->settings->number_of_times_each_philosopher_must_eat;
-	(void)eat_left;
 	while (!philo->store->one_dead)
 	{
 		take_left_fork(&philo);
 		take_right_fork(&philo);
 		philo_speak(philo, "is eating", 0);
+		if (--eat_left == 0)
+			return (quit(&philo));
 		if (!philo->store->one_dead)
 			philo->dead_time = get_current_ts()
 				+ philo->store->settings->time_to_die;
 		_usleep(philo->store->settings->time_to_eat);
 		philo_speak(philo, "is sleeping", 0);
-		drop_left_fork(&philo);
-		drop_right_fork(&philo);
+		drop_forks(&philo);
 		_usleep(philo->store->settings->time_to_sleep);
 		philo_speak(philo, "is thinking", 0);
 		_usleep(1);
