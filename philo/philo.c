@@ -6,7 +6,7 @@
 /*   By: kmazier <kmazier@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/20 17:38:41 by kmazier           #+#    #+#             */
-/*   Updated: 2021/09/22 00:18:30 by kmazier          ###   ########.fr       */
+/*   Updated: 2021/09/22 01:49:23 by kmazier          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,6 +50,7 @@ void	create_mutex(t_store **store, t_settings *settings)
 		if (pthread_mutex_init(&(*store)->keys[i], NULL))
 			__exit_and_free("Philosophers: mutex error",
 				EXIT_FAILURE, settings, (*store));
+	pthread_mutex_init(&(*store)->speak_lock, NULL);
 }
 
 void	start_threads(t_store **store, t_settings *settings)
@@ -94,6 +95,7 @@ void	start_philosophers(t_settings *settings)
 		pthread_mutex_unlock(&store->keys[i]);
 		pthread_mutex_destroy(&store->keys[i]);
 	}
+	pthread_mutex_destroy(&store->speak_lock);
 	__exit_and_free(NULL, EXIT_SUCCESS, settings, store);
 }
 
