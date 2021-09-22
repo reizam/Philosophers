@@ -6,7 +6,7 @@
 /*   By: kmazier <kmazier@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/20 17:38:41 by kmazier           #+#    #+#             */
-/*   Updated: 2021/09/22 17:14:22 by kmazier          ###   ########.fr       */
+/*   Updated: 2021/09/22 17:42:47 by kmazier          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,17 +47,6 @@ void	create_mutex(t_store **store, t_settings *settings)
 	pthread_mutex_init(&(*store)->speak_lock, NULL);
 }
 
-t_philo	*get_philo_by_id(t_philo *philo, int index)
-{
-	while (philo)
-	{
-		if (index == philo->id)
-			return (philo);
-		philo = philo->next;
-	}
-	return (NULL);
-}
-
 void	start_threads(t_store **store, t_settings *settings)
 {
 	int	i;
@@ -70,7 +59,8 @@ void	start_threads(t_store **store, t_settings *settings)
 	while (++i < settings->number_of_philosophers)
 	{
 		if (pthread_create(&(*store)->thread_clients[i],
-				NULL, philosopher_thread, get_philo_by_id((*store)->philos, i + 1)))
+				NULL, philosopher_thread,
+				get_philo_by_id((*store)->philos, i + 1)))
 			__exit_and_free("Philosophers: thread error",
 				EXIT_FAILURE, settings, (*store));
 		usleep(1);

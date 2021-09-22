@@ -6,7 +6,7 @@
 /*   By: kmazier <kmazier@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/21 20:42:00 by kmazier           #+#    #+#             */
-/*   Updated: 2021/09/22 00:26:15 by kmazier          ###   ########.fr       */
+/*   Updated: 2021/09/22 17:43:42 by kmazier          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,4 +66,12 @@ long long int	ft_atoi(char *str)
 		i++;
 	}
 	return (result * n);
+}
+
+int	get_current_ts(void)
+{
+	struct timeval	current_time;
+
+	gettimeofday(&current_time, NULL);
+	return (current_time.tv_sec * 1000 + current_time.tv_usec / 1000);
 }

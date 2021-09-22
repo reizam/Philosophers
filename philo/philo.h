@@ -6,7 +6,7 @@
 /*   By: kmazier <kmazier@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/20 17:39:10 by kmazier           #+#    #+#             */
-/*   Updated: 2021/09/22 17:03:27 by kmazier          ###   ########.fr       */
+/*   Updated: 2021/09/22 17:44:59 by kmazier          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,6 +76,10 @@ t_store			*free_store(t_store *store);
 void			drop_right_fork(t_philo **philo);
 void			drop_left_fork(t_philo **philo);
 void			drop_forks(t_philo **philo);
+void			take_forks(t_philo **philo);
 void			*quit(t_philo **philo);
+t_philo			*get_philo_by_id(t_philo *philo, int index);
+int				take_right_fork(t_philo **philo);
+int				take_left_fork(t_philo **philo);
 
 #endif

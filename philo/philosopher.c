@@ -6,7 +6,7 @@
 /*   By: kmazier <kmazier@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/20 18:22:14 by kmazier           #+#    #+#             */
-/*   Updated: 2021/09/22 17:17:38 by kmazier          ###   ########.fr       */
+/*   Updated: 2021/09/22 17:43:08 by kmazier          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,20 +58,6 @@ void	drop_right_fork(t_philo **philo)
 	if (right_id == (*philo)->store->settings->number_of_philosophers - 1)
 		right_id = 0;
 	pthread_mutex_unlock(&(*philo)->store->keys[right_id]);
-}
-
-void	take_forks(t_philo **philo)
-{
-	if ((*philo)->id % 2 == 0)
-	{
-		take_right_fork(philo);
-		take_left_fork(philo);
-	}
-	else
-	{
-		take_left_fork(philo);
-		take_right_fork(philo);
-	}
 }
 
 void	*philosopher_thread(void *p_data)

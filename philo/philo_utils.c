@@ -6,7 +6,7 @@
 /*   By: kmazier <kmazier@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/21 16:25:07 by kmazier           #+#    #+#             */
-/*   Updated: 2021/09/22 16:26:50 by kmazier          ###   ########.fr       */
+/*   Updated: 2021/09/22 17:42:55 by kmazier          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,4 +58,15 @@ void	_usleep(int time)
 	end = get_current_ts() + time;
 	while (get_current_ts() < end)
 		usleep(1);
+}
+
+t_philo	*get_philo_by_id(t_philo *philo, int index)
+{
+	while (philo)
+	{
+		if (index == philo->id)
+			return (philo);
+		philo = philo->next;
+	}
+	return (NULL);
 }
