@@ -6,7 +6,7 @@
 /*   By: kmazier <kmazier@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/20 17:38:41 by kmazier           #+#    #+#             */
-/*   Updated: 2021/09/22 01:49:23 by kmazier          ###   ########.fr       */
+/*   Updated: 2021/09/22 17:14:22 by kmazier          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,6 @@
 t_store	*create_store(t_settings *settings)
 {
 	t_store		*store;
-	int			i;
 
 	store = (t_store *)malloc(sizeof(t_store));
 	if (!store)
@@ -28,13 +27,6 @@ t_store	*create_store(t_settings *settings)
 			* settings->number_of_philosophers);
 	if (!store->keys)
 		return (free_store(store));
-	store->forks = (int *)malloc(sizeof(int)
-			* settings->number_of_philosophers);
-	if (!store->forks)
-		return (free_store(store));
-	i = -1;
-	while (++i < settings->number_of_philosophers)
-		store->forks[i] = 0;
 	store->philos = NULL;
 	store->one_dead = 0;
 	store->settings = settings;
@@ -47,10 +39,23 @@ void	create_mutex(t_store **store, t_settings *settings)
 
 	i = -1;
 	while (++i < settings->number_of_philosophers)
+	{
 		if (pthread_mutex_init(&(*store)->keys[i], NULL))
 			__exit_and_free("Philosophers: mutex error",
 				EXIT_FAILURE, settings, (*store));
+	}
 	pthread_mutex_init(&(*store)->speak_lock, NULL);
+}
+
+t_philo	*get_philo_by_id(t_philo *philo, int index)
+{
+	while (philo)
+	{
+		if (index == philo->id)
+			return (philo);
+		philo = philo->next;
+	}
+	return (NULL);
 }
 
 void	start_threads(t_store **store, t_settings *settings)
@@ -59,15 +64,17 @@ void	start_threads(t_store **store, t_settings *settings)
 
 	i = -1;
 	while (++i < settings->number_of_philosophers)
-	{
-		_usleep(1);
 		push(&(*store)->philos, i + 1, (*store));
+	(*store)->start_time = get_current_ts();
+	i = -1;
+	while (++i < settings->number_of_philosophers)
+	{
 		if (pthread_create(&(*store)->thread_clients[i],
-				NULL, philosopher_thread, (*store)->philos))
+				NULL, philosopher_thread, get_philo_by_id((*store)->philos, i + 1)))
 			__exit_and_free("Philosophers: thread error",
 				EXIT_FAILURE, settings, (*store));
+		usleep(1);
 	}
-	pthread_mutex_init(&(*store)->speak_lock, NULL);
 }
 
 void	start_philosophers(t_settings *settings)
@@ -88,13 +95,13 @@ void	start_philosophers(t_settings *settings)
 	pthread_join(store->thread_manager, NULL);
 	i = -1;
 	while (++i < settings->number_of_philosophers)
-		pthread_detach(store->thread_clients[i]);
+		pthread_mutex_unlock(&store->keys[i]);
 	i = -1;
 	while (++i < settings->number_of_philosophers)
-	{
-		pthread_mutex_unlock(&store->keys[i]);
+		pthread_join(store->thread_clients[i], NULL);
+	i = -1;
+	while (++i < settings->number_of_philosophers)
 		pthread_mutex_destroy(&store->keys[i]);
-	}
 	pthread_mutex_destroy(&store->speak_lock);
 	__exit_and_free(NULL, EXIT_SUCCESS, settings, store);
 }

@@ -6,7 +6,7 @@
 /*   By: kmazier <kmazier@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/20 17:39:10 by kmazier           #+#    #+#             */
-/*   Updated: 2021/09/22 00:51:48 by kmazier          ###   ########.fr       */
+/*   Updated: 2021/09/22 17:03:27 by kmazier          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,7 @@ typedef struct s_store
 	pthread_mutex_t	*keys;
 	pthread_mutex_t	speak_lock;
 	struct s_philo	*philos;
-	int				*forks;
+	int				start_time;
 	int				one_dead;
 }	t_store;
 
@@ -51,7 +51,6 @@ typedef struct s_philo
 	int				left;
 	int				right;
 	int				dead_time;
-	int				current_time;
 	struct s_philo	*next;
 }	t_philo;
 

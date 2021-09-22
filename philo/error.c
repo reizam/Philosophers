@@ -6,7 +6,7 @@
 /*   By: kmazier <kmazier@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/20 18:29:40 by kmazier           #+#    #+#             */
-/*   Updated: 2021/09/22 00:18:10 by kmazier          ###   ########.fr       */
+/*   Updated: 2021/09/22 03:25:51 by kmazier          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,8 +23,6 @@ t_store	*free_store(t_store *store)
 {
 	if (store->keys)
 		free(store->keys);
-	if (store->forks)
-		free(store->forks);
 	if (store->thread_clients)
 		free(store->thread_clients);
 	while (store->philos)
