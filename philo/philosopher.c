@@ -6,7 +6,7 @@
 /*   By: kmazier <kmazier@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/20 18:22:14 by kmazier           #+#    #+#             */
-/*   Updated: 2021/09/22 17:43:08 by kmazier          ###   ########.fr       */
+/*   Updated: 2021/09/23 16:44:40 by kmazier          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ int	take_left_fork(t_philo **philo)
 	int	left_id;
 
 	left_id = (*philo)->id - 2;
-	if (left_id == -1)
+	if (left_id < 0)
 		left_id = (*philo)->store->settings->number_of_philosophers - 1;
 	if ((*philo)->store->one_dead)
 		return (0);
@@ -31,8 +31,6 @@ int	take_right_fork(t_philo **philo)
 	int	right_id;
 
 	right_id = (*philo)->id - 1;
-	if (right_id == (*philo)->store->settings->number_of_philosophers - 1)
-		right_id = 0;
 	if ((*philo)->store->one_dead)
 		return (0);
 	pthread_mutex_lock(&(*philo)->store->keys[right_id]);
@@ -45,7 +43,7 @@ void	drop_left_fork(t_philo **philo)
 	int	left_id;
 
 	left_id = (*philo)->id - 2;
-	if (left_id == -1)
+	if (left_id < 0)
 		left_id = (*philo)->store->settings->number_of_philosophers - 1;
 	pthread_mutex_unlock(&(*philo)->store->keys[left_id]);
 }
@@ -55,8 +53,6 @@ void	drop_right_fork(t_philo **philo)
 	int	right_id;
 
 	right_id = (*philo)->id - 1;
-	if (right_id == (*philo)->store->settings->number_of_philosophers - 1)
-		right_id = 0;
 	pthread_mutex_unlock(&(*philo)->store->keys[right_id]);
 }
 
