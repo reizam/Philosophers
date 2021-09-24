@@ -6,7 +6,7 @@
 /*   By: kmazier <kmazier@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/20 18:22:14 by kmazier           #+#    #+#             */
-/*   Updated: 2021/09/24 16:42:47 by kmazier          ###   ########.fr       */
+/*   Updated: 2021/09/24 18:17:54 by kmazier          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,6 +64,8 @@ void	*philosopher_thread(void *p_data)
 	philo = (t_philo *)p_data;
 	eat_left
 		= philo->store->settings->number_of_times_each_philosopher_must_eat;
+	if (philo->id % 2)
+		_usleep(15);
 	while (!philo->store->one_dead)
 	{
 		take_forks(&philo);

@@ -6,7 +6,7 @@
 /*   By: kmazier <kmazier@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/22 00:19:43 by kmazier           #+#    #+#             */
-/*   Updated: 2021/09/22 17:45:35 by kmazier          ###   ########.fr       */
+/*   Updated: 2021/09/24 18:15:41 by kmazier          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,14 +62,6 @@ void	*quit(t_philo **philo)
 
 void	take_forks(t_philo **philo)
 {
-	if ((*philo)->id % 2 == 0)
-	{
-		take_right_fork(philo);
-		take_left_fork(philo);
-	}
-	else
-	{
-		take_left_fork(philo);
-		take_right_fork(philo);
-	}
+	take_right_fork(philo);
+	take_left_fork(philo);
 }
