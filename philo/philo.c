@@ -6,7 +6,7 @@
 /*   By: kmazier <kmazier@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/20 17:38:41 by kmazier           #+#    #+#             */
-/*   Updated: 2021/09/23 16:44:25 by kmazier          ###   ########.fr       */
+/*   Updated: 2021/09/24 16:52:07 by kmazier          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,7 @@ t_store	*create_store(t_settings *settings)
 		return (free_store(store));
 	store->philos = NULL;
 	store->one_dead = 0;
+	store->start_time = 0;
 	store->settings = settings;
 	return (store);
 }

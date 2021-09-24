@@ -6,7 +6,7 @@
 /*   By: kmazier <kmazier@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/20 17:39:10 by kmazier           #+#    #+#             */
-/*   Updated: 2021/09/22 17:44:59 by kmazier          ###   ########.fr       */
+/*   Updated: 2021/09/24 16:51:47 by kmazier          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,6 @@ typedef struct s_store
 {
 	pthread_t		*thread_clients;
 	pthread_t		thread_manager;
-	int				id;
 	t_settings		*settings;
 	pthread_mutex_t	*keys;
 	pthread_mutex_t	speak_lock;
