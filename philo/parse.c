@@ -6,7 +6,7 @@
 /*   By: kmazier <kmazier@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/20 17:47:24 by kmazier           #+#    #+#             */
-/*   Updated: 2021/09/22 00:22:58 by kmazier          ###   ########.fr       */
+/*   Updated: 2021/09/27 04:05:25 by kmazier          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ int	check_philo_args(char **args)
 		if (!ft_is_number(args[i]))
 			return (0);
 		temp = ft_atoi(args[i]);
-		if (temp < 1 || i >= INT_MAX)
+		if (temp < 1 || temp >= INT_MAX)
 			return (0);
 	}
 	return (1);

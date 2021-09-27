@@ -6,7 +6,7 @@
 /*   By: kmazier <kmazier@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/20 17:38:41 by kmazier           #+#    #+#             */
-/*   Updated: 2021/09/24 16:52:07 by kmazier          ###   ########.fr       */
+/*   Updated: 2021/09/27 04:11:53 by kmazier          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,9 @@ t_store	*create_store(t_settings *settings)
 	store = (t_store *)malloc(sizeof(t_store));
 	if (!store)
 		return (NULL);
+	store->thread_clients = NULL;
+	store->keys = NULL;
+	store->philos = NULL;
 	store->thread_clients = (pthread_t *)malloc(sizeof(pthread_t)
 			* settings->number_of_philosophers);
 	if (!store->thread_clients)
